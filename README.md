@@ -1,6 +1,6 @@
 # quick_pick
 
-A new Flutter project.
+A Flutter Project For Quick-Pick Application.
 
 ## Getting Started
 
