@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quick_pick/style/theme.dart' as Theme;
 import 'package:quick_pick/utils/bubble_indication_painter.dart';
 
-import 'home_page.dart';
+import 'main_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -341,9 +341,9 @@ class _LoginPageState extends State<LoginPage>
                             fontFamily: "WorkSansBold"),
                       ),
                     ),
-                    onPressed: () => Navigator.push(
+                    onPressed: () => Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
+                          MaterialPageRoute(builder: (context) => MainPage()),
                         )),
               ),
             ],

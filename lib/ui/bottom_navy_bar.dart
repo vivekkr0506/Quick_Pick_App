@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:quick_pick/style/theme.dart' as Themes;
 
 /// A beautiful and animated bottom navigation that paints a rounded shape
 /// around its [items] to provide a wonderful look.
@@ -149,8 +150,17 @@ class _ItemWidget extends StatelessWidget {
         duration: animationDuration,
         curve: curve,
         decoration: BoxDecoration(
-          color:
-              isSelected ? item.activeColor.withOpacity(0.2) : backgroundColor,
+           gradient:isSelected ? new LinearGradient(
+                colors: [
+                  Themes.Colors.loginGradientEnd ,
+                  Themes.Colors.loginGradientStart
+                ],
+                begin: const FractionalOffset(0.0, 0.0),
+                end: const FractionalOffset(1.0, 1.0),
+                stops: [0.0, 1.0],
+                tileMode: TileMode.clamp): null,
+          // color:
+          //     isSelected ? item.activeColor.withOpacity(0.4) : backgroundColor,
           borderRadius: BorderRadius.circular(itemCornerRadius),
         ),
         child: SingleChildScrollView(

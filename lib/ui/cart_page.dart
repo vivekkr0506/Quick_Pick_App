@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_pick/style/theme.dart' as Theme;
-import 'package:quick_pick/ui/home_page.dart';
 import 'package:quick_pick/utils/base_ui.dart';
-import 'package:quick_pick/utils/generic_button.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class CartPage extends StatelessWidget {
   @override

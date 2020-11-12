@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:quick_pick/ui/login_page.dart';
+import 'package:quick_pick/ui/splash_screen.dart';
+import 'package:quick_pick/ui/main_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(new MyApp());
+//import 'main_page.dart';
+int initScreen;
+//void main() => runApp(new MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  initScreen = await prefs.getInt("initScreen");
+  await prefs.setInt("initScreen", 1);
+  print('initScreen ${initScreen}');
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,7 +24,18 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new LoginPage(),
+      // initialRoute: initScreen == 0 || initScreen == null ? "first" : "/",
+      // routes: {
+      //   '/': (context) => MainPage(),
+      //   "first": (context) => OnboardingScreen(),
+      // },
+      home: new SplashScreen(),
+      //home: initScreen == 0 || initScreen == null? OnboardingScreen() : LoginPage(),
+      debugShowCheckedModeBanner: false,
+      darkTheme: new ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      themeMode: ThemeMode.system,
     );
   }
 }
