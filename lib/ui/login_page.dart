@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,7 +16,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage>
+
     with SingleTickerProviderStateMixin {
+      String _batteryLevel = "Mobile Number";
+  static const platform = const MethodChannel('samples.flutter.dev/phone');
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   final FocusNode myFocusNodeEmailLogin = FocusNode();
@@ -230,6 +235,7 @@ class _LoginPageState extends State<LoginPage>
                             top: 20.0, bottom: 20.0, left: 55.0, right: 25.0),
                         child: TextFormField(
                           focusNode: myFocusNodeEmailLogin,
+                          onTap: _getPhoneNumber,
                           controller: loginEmailController,
                           keyboardType: TextInputType.number,
                           validator: validateMobile,
@@ -244,9 +250,10 @@ class _LoginPageState extends State<LoginPage>
                               color: Colors.blue,
                               size: 26.0,
                             ),
-                            hintText: "Mobile Number",
+                            hintText: (_batteryLevel),
+                          
                             hintStyle: TextStyle(
-                                fontFamily: "WorkSansSemiBold", fontSize: 17.0),
+                                fontFamily: "WorkSansSemiBold", fontSize: 22.0,color: Colors.black),
                           ),
                         ),
                       ),
@@ -681,5 +688,19 @@ class _LoginPageState extends State<LoginPage>
       return 'Mobile Number must be of 10 digit';
     else
       return null;
+  }
+
+  Future<void> _getPhoneNumber() async {
+    String batteryLevel;
+    try {
+      final String result = await platform.invokeMethod('getPhoneNumber');
+      batteryLevel = result;
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
   }
 }

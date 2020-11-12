@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:quick_pick/style/theme.dart' as Theme;
 import 'package:quick_pick/utils/generic_button.dart';
 
-class BaseUi extends StatelessWidget {
+class BaseUi extends StatefulWidget {
+  String buttonText;
+  BaseUi(this.buttonText);
+
+  @override
+  _BaseUiState createState() => _BaseUiState();
+}
+
+class _BaseUiState extends State<BaseUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +64,9 @@ class BaseUi extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(
                     top: 10.0, bottom: 0.0, left: 0.0, right: 0.0),
-                child: GenericButton("Go Back"),
-              )),
+                child: GenericButton(widget.buttonText),
+              ),
+              ),
         ),
       ),
     );
