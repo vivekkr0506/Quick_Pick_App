@@ -1,3 +1,6 @@
+import 'dart:ffi';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:quick_pick/style/theme.dart' as Theme;
 import 'package:flutter/services.dart';
@@ -70,9 +73,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height >= 775.0
-                      ? MediaQuery.of(context).size.height
-                      : 500.0,
+                   height: MediaQuery.of(context).size.height >= 775.0
+                ? MediaQuery.of(context).size.height
+                : 500.0,
                   child: PageView(
                     physics: ClampingScrollPhysics(),
                     controller: _pageController,
@@ -96,7 +99,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 width: 300.0,
                               ),
                             ),
-                            SizedBox(height: 30.0),
                             Text(
                               'Welcome to ...',
                               style: TextStyle(
@@ -105,7 +107,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   fontFamily: "WorkSansBold"),
                               //style: kTitleStyle,
                             ),
-                            SizedBox(height: 15.0),
                             Text(
                               'lorem Ipsum',
                               style: TextStyle(
