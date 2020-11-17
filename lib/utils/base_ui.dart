@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quick_pick/style/theme.dart' as Theme;
+import 'package:quick_pick/utils/NeumorphicContainer.dart';
 import 'package:quick_pick/utils/generic_button.dart';
 
 class BaseUi extends StatefulWidget {
   String buttonText;
-  BaseUi(this.buttonText);
+  final Widget child;
+  BaseUi({this.buttonText, this.child});
 
   @override
   _BaseUiState createState() => _BaseUiState();
@@ -35,38 +37,41 @@ class _BaseUiState extends State<BaseUi> {
                 tileMode: TileMode.clamp),
           ),
           child: Container(
-              margin:
-                  EdgeInsets.only(top: 0.0, bottom: 0.0, left: 0.0, right: 0.0),
-              decoration: new BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: Theme.Colors.loginGradientStart,
-                    offset: Offset(1.0, 6.0),
-                    blurRadius: 20.0,
-                  ),
-                  BoxShadow(
-                    color: Theme.Colors.loginGradientEnd,
-                    offset: Offset(1.0, 6.0),
-                    blurRadius: 20.0,
-                  ),
-                ],
-                gradient: new LinearGradient(
-                    colors: [
-                      Theme.Colors.loginGradientEnd,
-                      Theme.Colors.loginGradientStart
-                    ],
-                    begin: const FractionalOffset(0.2, 0.2),
-                    end: const FractionalOffset(1.0, 1.0),
-                    stops: [0.0, 1.0],
-                    tileMode: TileMode.clamp),
+            margin:
+                EdgeInsets.only(top: 0.0, bottom: 0.0, left: 0.0, right: 0.0),
+            decoration: new BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Theme.Colors.loginGradientStart,
+                  offset: Offset(1.0, 6.0),
+                  blurRadius: 20.0,
+                ),
+                BoxShadow(
+                  color: Theme.Colors.loginGradientEnd,
+                  offset: Offset(1.0, 6.0),
+                  blurRadius: 20.0,
+                ),
+              ],
+              gradient: new LinearGradient(
+                  colors: [
+                    Theme.Colors.loginGradientEnd,
+                    Theme.Colors.loginGradientStart
+                  ],
+                  begin: const FractionalOffset(0.2, 0.2),
+                  end: const FractionalOffset(1.0, 1.0),
+                  stops: [0.0, 1.0],
+                  tileMode: TileMode.clamp),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+              // child: GenericButton(widget.buttonText),
+              child: Center(
+                child: widget.child,
               ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                child: GenericButton(widget.buttonText),
-              ),
-              ),
+            ),
+          ),
         ),
       ),
     );

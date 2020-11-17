@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_pick/ui/login_page.dart';
 import 'package:quick_pick/ui/splash_screen.dart';
-import 'package:quick_pick/ui/main_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //import 'main_page.dart';

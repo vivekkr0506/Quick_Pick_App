@@ -16,9 +16,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage>
-
     with SingleTickerProviderStateMixin {
-      String _batteryLevel = "Mobile Number";
+  String _batteryLevel = "Mobile Number";
   static const platform = const MethodChannel('samples.flutter.dev/phone');
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -50,7 +49,7 @@ class _LoginPageState extends State<LoginPage>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      resizeToAvoidBottomPadding : true,
+      resizeToAvoidBottomPadding: true,
       key: _scaffoldKey,
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overscroll) {
@@ -252,9 +251,10 @@ class _LoginPageState extends State<LoginPage>
                               size: 26.0,
                             ),
                             hintText: (_batteryLevel),
-                          
                             hintStyle: TextStyle(
-                                fontFamily: "WorkSansSemiBold", fontSize: 22.0,color: Colors.black),
+                                fontFamily: "WorkSansSemiBold",
+                                fontSize: 22.0,
+                                color: Colors.black),
                           ),
                         ),
                       ),

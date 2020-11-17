@@ -4,7 +4,7 @@ import 'package:quick_pick/utils/base_ui.dart';
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   return new Scaffold(
+    return new Scaffold(
       // bottomNavigationBar: CurvedNavigationBar(
       //   backgroundColor: Colors.transparent,
       //   items: <Widget>[
@@ -18,12 +18,18 @@ class CartPage extends StatelessWidget {
       //     Icon(Icons.search, size: 30, color: Colors.red),
       //   ],
       //   onTap: (index) {
-        
-    
+
       //   },
       // ),
       body: Container(
-        child: BaseUi("CART PAGE"),
+        child: BaseUi(
+            child: Text(
+          "CART PAGE",
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontFamily: "WorkSansSemiBold"),
+        )),
       ),
     );
   }

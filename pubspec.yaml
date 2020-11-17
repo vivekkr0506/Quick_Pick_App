@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^0.5.1+2
+  geolocator: ^6.1.4
+  geocoding: ^1.0.5
 
   cupertino_icons: ^0.1.2
   curved_navigation_bar: ^0.3.4

@@ -7,7 +7,14 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: Container(
-      child: BaseUi("Search Page"),
+      child: BaseUi(
+          child: Text(
+        "Search Page",
+        style: TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+            fontFamily: "WorkSansSemiBold"),
+      )),
     ));
   }
 }
