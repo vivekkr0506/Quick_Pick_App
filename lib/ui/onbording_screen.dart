@@ -73,9 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height >= 775.0
-                      ? MediaQuery.of(context).size.height
-                      : 500.0,
+                  height: 700,
                   child: PageView(
                     physics: ClampingScrollPhysics(),
                     controller: _pageController,
@@ -100,16 +98,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             Text(
-                              'Welcome to ...',
+                              'Welcome to..  Quick Pick',
                               style: TextStyle(
                                   color: Colors.red,
-                                  fontSize: 30.0,
+                                  fontSize: 39.0,
                                   fontFamily: "WorkSansBold"),
                               //style: kTitleStyle,
                             ),
                             Text(
-                              'lorem Ipsum',
-                              style: TextStyle(
+                              'Want Anything...    Will do For You',
+                              style: TextStyle( 
                                   color: Colors.white,
                                   fontSize: 25.0,
                                   fontFamily: "WorkSansBold"),

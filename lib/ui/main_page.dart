@@ -1,4 +1,3 @@
-
 import 'package:quick_pick/ui/cart_page.dart';
 import 'package:quick_pick/ui/home_page.dart';
 import 'package:quick_pick/ui/orders_page.dart';
@@ -6,6 +5,7 @@ import 'package:quick_pick/ui/profile_page.dart';
 import 'package:quick_pick/ui/search_page.dart';
 import 'package:quick_pick/ui/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key key}) : super(key: key);
@@ -17,7 +17,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   PageController _pageController;
-  
 
   @override
   void initState() {
@@ -60,7 +59,7 @@ class _MainPageState extends State<MainPage> {
           _pageController.jumpToPage(index);
         },
         items: <BottomNavyBarItem>[
-            BottomNavyBarItem(
+          BottomNavyBarItem(
               title: Text(
                 'Home',
                 textAlign: TextAlign.center,
@@ -69,7 +68,7 @@ class _MainPageState extends State<MainPage> {
                     fontSize: 20.0,
                     fontFamily: "WorkSansSemiBold"),
               ),
-              icon: Icon(Icons.home,size: 30),
+              icon: Icon(Icons.home, size: 30),
               inactiveColor: Color(0xFFfc0022),
               activeColor: Colors.white),
           BottomNavyBarItem(
@@ -82,7 +81,13 @@ class _MainPageState extends State<MainPage> {
                     fontSize: 20.0,
                     fontFamily: "WorkSansSemiBold"),
               ),
-              icon: Icon(Icons.shopping_cart,size: 30),
+              icon: Badge(
+                animationDuration: Duration(milliseconds: 300),
+                animationType: BadgeAnimationType.slide,
+                badgeContent: Text('3'),
+                child: Icon(Icons.shopping_cart, size: 30),
+              ),
+              // icon: Icon(Icons.shopping_cart,size: 30),
               inactiveColor: Color(0xFFfc0022),
               activeColor: Colors.white),
           BottomNavyBarItem(
@@ -94,7 +99,7 @@ class _MainPageState extends State<MainPage> {
                     fontSize: 20.0,
                     fontFamily: "WorkSansSemiBold"),
               ),
-              icon: Icon(Icons.search,size: 30),
+              icon: Icon(Icons.search, size: 30),
               inactiveColor: Color(0xFFfc0022),
               activeColor: Colors.white),
           BottomNavyBarItem(
@@ -102,11 +107,11 @@ class _MainPageState extends State<MainPage> {
                 'Orders',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                   color: Colors.white,
+                    color: Colors.white,
                     fontSize: 20.0,
                     fontFamily: "WorkSansSemiBold"),
               ),
-              icon: Icon(Icons.history,size: 30),
+              icon: Icon(Icons.history, size: 30),
               inactiveColor: Color(0xFFfc0022),
               activeColor: Colors.white),
           BottomNavyBarItem(
@@ -118,7 +123,7 @@ class _MainPageState extends State<MainPage> {
                     fontSize: 20.0,
                     fontFamily: "WorkSansSemiBold"),
               ),
-              icon: Icon(Icons.portrait,size: 30),
+              icon: Icon(Icons.portrait, size: 30),
               inactiveColor: Color(0xFFfc0022),
               activeColor: Colors.white),
         ],

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quick_pick/style/theme.dart' as Theme;
 import 'package:quick_pick/utils/bubble_indication_painter.dart';
-
+import 'package:sms_autofill/sms_autofill.dart';
 import 'main_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -233,12 +233,13 @@ class _LoginPageState extends State<LoginPage>
                       Padding(
                         padding: EdgeInsets.only(
                             top: 20.0, bottom: 20.0, left: 55.0, right: 25.0),
-                        child: TextFormField(
+                            child: PhoneFieldHint(
+                              autofocus : true,
+                              child: TextField(
                           focusNode: myFocusNodeEmailLogin,
-                          onTap: _getPhoneNumber,
                           controller: loginEmailController,
                           keyboardType: TextInputType.number,
-                          validator: validateMobile,
+                          //validator: validateMobile,
                           style: TextStyle(
                               fontFamily: "WorkSansSemiBold",
                               fontSize: 22.0,
@@ -250,13 +251,38 @@ class _LoginPageState extends State<LoginPage>
                               color: Colors.blue,
                               size: 26.0,
                             ),
-                            hintText: (_batteryLevel),
+                            hintText: ("Mobile Number"),
                             hintStyle: TextStyle(
                                 fontFamily: "WorkSansSemiBold",
                                 fontSize: 22.0,
                                 color: Colors.black),
                           ),
                         ),
+                            ),
+                        // child: TextFormField(
+                        //   focusNode: myFocusNodeEmailLogin,
+                        //   onTap: _getPhoneNumber,
+                        //   controller: loginEmailController,
+                        //   keyboardType: TextInputType.number,
+                        //   validator: validateMobile,
+                        //   style: TextStyle(
+                        //       fontFamily: "WorkSansSemiBold",
+                        //       fontSize: 22.0,
+                        //       color: Colors.black),
+                        //   decoration: InputDecoration(
+                        //     border: InputBorder.none,
+                        //     icon: Icon(
+                        //       FontAwesomeIcons.mobileAlt,
+                        //       color: Colors.blue,
+                        //       size: 26.0,
+                        //     ),
+                        //     hintText: (_batteryLevel),
+                        //     hintStyle: TextStyle(
+                        //         fontFamily: "WorkSansSemiBold",
+                        //         fontSize: 22.0,
+                        //         color: Colors.black),
+                        //   ),
+                        // ),
                       ),
                       // Container(
                       //   width: 250.0,
@@ -703,5 +729,15 @@ class _LoginPageState extends State<LoginPage>
     setState(() {
       _batteryLevel = batteryLevel;
     });
+  }
+}
+
+class HeaderSection extends StatelessWidget {
+  final String title;
+  final String name;
+  const HeaderSection({Key key, this.title, this.name}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return PhoneFieldHint();
   }
 }
