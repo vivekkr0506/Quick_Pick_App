@@ -125,6 +125,7 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(builder: (context) => Address()),
     );
   }
+
   Widget _search() {
     return Container(
       margin: Theme.Colors.padding,
@@ -138,11 +139,13 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: TextField(
-                onTap:() => {Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => SearchPage()),
-                        )},
-                readOnly: true,
+                // onTap: () => {
+                //   Navigator.pushReplacement(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => SearchPage()),
+                //   )
+                // },
+                //readOnly: true,
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: "Search Products",
@@ -160,7 +163,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-Widget _icon(IconData icon, {Color color =Colors.red}) {
+  Widget _icon(IconData icon, {Color color = Colors.red}) {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -172,7 +175,6 @@ Widget _icon(IconData icon, {Color color =Colors.red}) {
       ),
     ).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(13)));
   }
-
 
   Widget _categoryWidget() {
     return Container(
@@ -243,9 +245,10 @@ Widget _icon(IconData icon, {Color color =Colors.red}) {
               _naviagteToAddress();
             },
             child: Container(
+              padding: EdgeInsets.only(left:20),
               child: Icon(
-                Icons.location_on,
-                size: 30,
+                Icons.home,
+                size: 35,
                 color: Colors.white,
               ),
             )),
@@ -257,13 +260,13 @@ Widget _icon(IconData icon, {Color color =Colors.red}) {
               fontSize: 20.0,
               fontFamily: "WorkSansSemiBold"),
         )),
-        elevation: 0.0,
+        elevation:10.0,
         backgroundColor: Colors.transparent,
       ),
       body: Container(
         child: BaseUi(
           child: Container(
-            height: MediaQuery.of(context).size.height-200,
+           padding: EdgeInsets.only(top:80),
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               dragStartBehavior: DragStartBehavior.down,
@@ -272,6 +275,12 @@ Widget _icon(IconData icon, {Color color =Colors.red}) {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   _search(),
+                  _categoryWidget(),
+                  _productWidget(),
+                  _categoryWidget(),
+                  _productWidget(),
+                  _search(),
+                  _productWidget(),
                   _categoryWidget(),
                   _productWidget(),
                 ],

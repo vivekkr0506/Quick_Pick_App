@@ -35,6 +35,8 @@
 //   }
 // }
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:quick_pick/utils/base_ui.dart';
 import 'package:quick_pick/utils/product_card.dart';
@@ -50,6 +52,7 @@ import 'package:quick_pick/widgets/title_text.dart';
 import 'package:quick_pick/widgets/extentions.dart';
 import 'package:quick_pick/ui/login_page.dart';
 import 'package:quick_pick/style/theme.dart' as Theme;
+import 'package:quick_pick/utils/MarqueeWidget.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key key}) : super(key: key);
@@ -87,45 +90,48 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  left: -20,
-                  bottom: -20,
+                  left: -10,
+                  bottom: -10,
                   child: Image.asset(model.image),
                 )
               ],
             ),
           ),
           Expanded(
-              child: ListTile(
-                  title: TitleText(
-                    text: model.name,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  subtitle: Row(
-                    children: <Widget>[
-                      TitleText(
-                        text: '\₹ ',
-                        color: Colors.white,
-                        fontSize: 12,
-                      ),
-                      TitleText(
-                        text: model.price.toString(),
-                        fontSize: 14,
-                      ),
-                    ],
-                  ),
-                  trailing: Container(
-                    width: 35,
-                    height: 35,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: LightColor.lightGrey.withAlpha(150),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: TitleText(
-                      text: 'x${model.id}',
-                      fontSize: 12,
-                    ),
-                  )))
+              child: Container(
+                  child: ListTile(
+            title: TitleText(
+              text: model.name,
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+            ),
+            subtitle: Row(
+              children: <Widget>[
+                TitleText(
+                  text: '\₹ ',
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
+                TitleText(
+                  text: model.price.toString(),
+                  fontSize: 14,
+                ),
+              ],
+            ),
+            trailing: Container(
+              width: 35,
+              height: 35,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: LightColor.lightGrey.withAlpha(150),
+                  borderRadius: BorderRadius.circular(10)),
+              child: TitleText(
+                text: 'x${model.id}',
+                fontSize: 12,
+              ),
+            ),
+          )
+          )),
         ],
       ),
     );
@@ -177,8 +183,33 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: new AppBar(
+        leading: BackButton(
+            // child: Container(
+            //   child: Icon(
+            //     Icons.arrow_back,
+            //     size: 30,
+            //     color: Colors.white,
+            //   ),
+            // )
+            ),
+        elevation: 10.0,
+      
+        backgroundColor: Colors.transparent,
+        title: MarqueeWidget(
+            child: Text(
+          "Your Cart",
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontFamily: "WorkSansSemiBold"),
+        )),
+      ),
       body: Container(
         child: BaseUi(
+            child: Container(
+          padding: EdgeInsets.only(top: 70),
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -193,7 +224,7 @@ class CartPage extends StatelessWidget {
               ],
             ),
           ),
-        ),
+        )),
       ),
     );
   }

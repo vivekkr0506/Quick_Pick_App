@@ -54,7 +54,7 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 80,
+              left: 75,
               top: 0,
               child: RaisedButton(
                 shape: RoundedRectangleBorder(
