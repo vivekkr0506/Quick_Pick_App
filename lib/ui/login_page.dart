@@ -181,7 +181,7 @@ class _LoginPageState extends State<LoginPage>
                 highlightColor: Colors.transparent,
                 onPressed: _onSignInButtonPress,
                 child: Text(
-                  "Existing",
+                  "OTP",
                   style: TextStyle(
                       color: left,
                       fontSize: 16.0,
@@ -196,7 +196,7 @@ class _LoginPageState extends State<LoginPage>
                 highlightColor: Colors.transparent,
                 onPressed: _onSignUpButtonPress,
                 child: Text(
-                  "New",
+                  "Password",
                   style: TextStyle(
                       color: right,
                       fontSize: 16.0,
@@ -234,7 +234,6 @@ class _LoginPageState extends State<LoginPage>
                         padding: EdgeInsets.only(
                             top: 20.0, bottom: 20.0, left: 55.0, right: 25.0),
                             child: PhoneFieldHint(
-                              autofocus : true,
                               child: TextField(
                           focusNode: myFocusNodeEmailLogin,
                           controller: loginEmailController,
@@ -364,7 +363,7 @@ class _LoginPageState extends State<LoginPage>
                         "GET OTP",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 25.0,
+                            fontSize: 20.0,
                             fontFamily: "WorkSansBold"),
                       ),
                     ),
@@ -543,8 +542,8 @@ class _LoginPageState extends State<LoginPage>
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(
-                              FontAwesomeIcons.magento,
-                              color: Colors.red,
+                              FontAwesomeIcons.mobileAlt,
+                              color: Colors.black,
                             ),
                             hintText: "Mobile Number",
                             hintStyle: TextStyle(
@@ -665,7 +664,7 @@ class _LoginPageState extends State<LoginPage>
                       padding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 42.0),
                       child: Text(
-                        "SIGN UP",
+                        "LOGIN",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25.0,

@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -40,8 +39,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
+      body: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (overscroll) {
+          overscroll.disallowGlow();
+        },
         child: Container(
           decoration: new BoxDecoration(
             gradient: new LinearGradient(
@@ -62,7 +63,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: FlatButton(
-                    onPressed: () => print('Skip'),
+                    onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  ), 
                     child: Text(
                       'Skip',
                       style: TextStyle(
@@ -73,7 +77,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 Container(
-                  height: 700,
+                  height: 500,
                   child: PageView(
                     physics: ClampingScrollPhysics(),
                     controller: _pageController,
@@ -98,18 +102,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             Text(
-                              'Welcome to..  Quick Pick',
+                              'Welcome to..  Quick  Pick ' ,
                               style: TextStyle(
                                   color: Colors.red,
-                                  fontSize: 39.0,
+                                  fontSize: 30.0,
                                   fontFamily: "WorkSansBold"),
                               //style: kTitleStyle,
                             ),
                             Text(
                               'Want Anything...    Will do For You',
-                              style: TextStyle( 
+                              style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25.0,
+                                  fontSize: 20.0,
                                   fontFamily: "WorkSansBold"),
                               //style: kSubtitleStyle,
                             ),
@@ -232,28 +236,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
       ),
       bottomSheet: _currentPage == _numPages - 1
-          ? Container(
-              height: 50.0,
-              width: double.infinity,
-              color: Colors.white,
-              child: GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: Text(
-                      'Get Started',
-                      style: TextStyle(
-                        color: Color(0xFF5B16D0),
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
+          ? InkWell(
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  ), // Handle your callback
+                child: Container(
+                height: 50.0,
+                width: double.infinity,
+                color: Colors.white,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: Text(
+                        'Get Started',
+                        style: TextStyle(
+                          color: Color(0xFF5B16D0),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                
               ),
             )
           : Text(''),
