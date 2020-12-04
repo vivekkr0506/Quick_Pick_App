@@ -12,7 +12,8 @@ import 'package:quick_pick/model/data.dart';
 import 'package:quick_pick/widgets/product_icon.dart';
 import 'package:flutter/gestures.dart';
 import 'package:quick_pick/widgets/extentions.dart';
-
+import 'package:quick_pick/model/product.dart';
+import 'package:quick_pick/utils/product_cardV2.dart';
 final europeanCountries = [
   'Albania',
   'Andorra',
@@ -76,6 +77,7 @@ class _HomePageState extends State<HomePage> {
   // final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
   Position _currentPosition;
   String _currentAddress;
+  List<Meal> displayedMeals;
 
   @override
   void initState() {
@@ -234,6 +236,37 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+Widget _productV2() {
+    return Container(
+      width: Theme.Colors.fullWidth(context),
+      height: Theme.Colors.fullHeight(context),
+      child: ListView(
+        children: AppData.meal
+            .map(
+              (meal) => MealItem(
+                id: meal.id,
+                title : meal.title,
+                imageUrl : meal.imageUrl,
+                duration : meal.duration,
+                complexity : meal.complexity,
+                affordability : meal.affordability,
+                onSelected: (model) {
+                  setState(() {
+                    AppData.meal.forEach((item) {
+                      item.affordability;
+                      item.imageUrl;
+                      item.complexity;
+                      item.isVegetarian;
+                    });
+                  });
+                },
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -274,15 +307,10 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  _search(),
-                  _categoryWidget(),
-                  _productWidget(),
-                  _categoryWidget(),
-                  _productWidget(),
-                  _search(),
-                  _productWidget(),
-                  _categoryWidget(),
-                  _productWidget(),
+                   _search(),
+                   _categoryWidget(),
+                   _productWidget(),
+                  _productV2(),
                 ],
               ),
             ),

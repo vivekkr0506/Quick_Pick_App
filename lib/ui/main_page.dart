@@ -1,3 +1,4 @@
+import 'package:quick_pick/model/data.dart';
 import 'package:quick_pick/ui/cart_page.dart';
 import 'package:quick_pick/ui/home_page.dart';
 import 'package:quick_pick/ui/orders_page.dart';
@@ -84,7 +85,8 @@ class _MainPageState extends State<MainPage> {
               icon: Badge(
                 animationDuration: Duration(milliseconds: 300),
                 animationType: BadgeAnimationType.slide,
-                badgeContent: Text('3'),
+                badgeContent: Text('${AppData.cartList.length}'),
+                
                 child: Icon(Icons.shopping_cart, size: 30),
               ),
               // icon: Icon(Icons.shopping_cart,size: 30),
