@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:quick_pick/ui/search_page.dart';
 import 'package:quick_pick/utils/MarqueeWidget.dart';
-import 'package:quick_pick/utils/NeumorphicContainer.dart';
 import 'package:quick_pick/utils/base_ui.dart';
 import 'package:quick_pick/style/theme.dart' as Theme;
 import 'package:geolocator/geolocator.dart';
@@ -14,59 +12,7 @@ import 'package:flutter/gestures.dart';
 import 'package:quick_pick/widgets/extentions.dart';
 import 'package:quick_pick/model/product.dart';
 import 'package:quick_pick/utils/product_cardV2.dart';
-final europeanCountries = [
-  'Albania',
-  'Andorra',
-  'Armenia',
-  'Austria',
-  'Azerbaijan',
-  'Belarus',
-  'Belgium',
-  'Bosnia and Herzegovina',
-  'Bulgaria',
-  'Croatia',
-  'Cyprus',
-  'Czech Republic',
-  'Denmark',
-  'Estonia',
-  'Finland',
-  'France',
-  'Georgia',
-  'Germany',
-  'Greece',
-  'Hungary',
-  'Iceland',
-  'Ireland',
-  'Italy',
-  'Kazakhstan',
-  'Kosovo',
-  'Latvia',
-  'Liechtenstein',
-  'Lithuania',
-  'Luxembourg',
-  'Macedonia',
-  'Malta',
-  'Moldova',
-  'Monaco',
-  'Montenegro',
-  'Netherlands',
-  'Norway',
-  'Poland',
-  'Portugal',
-  'Romania',
-  'Russia',
-  'San Marino',
-  'Serbia',
-  'Slovakia',
-  'Slovenia',
-  'Spain',
-  'Sweden',
-  'Switzerland',
-  'Turkey',
-  'Ukraine',
-  'United Kingdom',
-  'Vatican City'
-];
+import 'package:quick_pick/utils/crousel_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -236,7 +182,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-Widget _productV2() {
+  Widget _productV2() {
     return Container(
       width: Theme.Colors.fullWidth(context),
       height: Theme.Colors.fullHeight(context),
@@ -245,11 +191,11 @@ Widget _productV2() {
             .map(
               (meal) => MealItem(
                 id: meal.id,
-                title : meal.title,
-                imageUrl : meal.imageUrl,
-                duration : meal.duration,
-                complexity : meal.complexity,
-                affordability : meal.affordability,
+                title: meal.title,
+                imageUrl: meal.imageUrl,
+                duration: meal.duration,
+                complexity: meal.complexity,
+                affordability: meal.affordability,
                 onSelected: (model) {
                   setState(() {
                     AppData.meal.forEach((item) {
@@ -267,6 +213,38 @@ Widget _productV2() {
     );
   }
 
+  Widget _croselList() {
+    return Container(
+      width: Theme.Colors.fullWidth(context),
+      height: 380,
+      child: ScaledList(
+        itemCount: categories.length,
+        itemColor: (index) {
+          return kMixedColors[index % kMixedColors.length];
+        },
+        itemBuilder: (index, selectedIndex) {
+          final category = categories[index];
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: selectedIndex == index ? 100 : 80,
+                child: Image.asset(category.image),
+              ),
+              SizedBox(height: 15),
+              Text(
+                category.name,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: selectedIndex == index ? 25 : 20),
+              )
+            ],
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -278,7 +256,7 @@ Widget _productV2() {
               _naviagteToAddress();
             },
             child: Container(
-              padding: EdgeInsets.only(left:20),
+              padding: EdgeInsets.only(left: 20),
               child: Icon(
                 Icons.home,
                 size: 35,
@@ -293,13 +271,13 @@ Widget _productV2() {
               fontSize: 20.0,
               fontFamily: "WorkSansSemiBold"),
         )),
-        elevation:10.0,
+        elevation: 10.0,
         backgroundColor: Colors.transparent,
       ),
       body: Container(
         child: BaseUi(
           child: Container(
-           padding: EdgeInsets.only(top:80),
+            padding: EdgeInsets.only(top: 80),
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               dragStartBehavior: DragStartBehavior.down,
@@ -307,55 +285,42 @@ Widget _productV2() {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                   _search(),
-                   _categoryWidget(),
-                   _productWidget(),
+                  _search(),
+                  _croselList(),
+                  _categoryWidget(),
+                  _productWidget(),
                   _productV2(),
                 ],
               ),
             ),
           ),
         ),
-
-        // child: new ListView.builder(
-        //     scrollDirection: Axis.vertical,
-        //     itemCount: europeanCountries.length,
-        //     itemBuilder: (BuildContext ctxt, int index) {
-        //       EdgeInsets padding = index == 0
-        //           ? const EdgeInsets.only(
-        //               left: 2.0, right: 2.0, top: 0.0, bottom: 10.0)
-        //           : const EdgeInsets.only(
-        //               left: 2.0, right: 2.0, top: 0.0, bottom: 10.0);
-        //       return new Padding(
-        //         padding: padding,
-        // child: Container(
-        //   height: 250,
-        //   width: 200,
-        //   decoration: new BoxDecoration(
-        //     borderRadius: BorderRadius.circular(20),
-        //     gradient: new LinearGradient(
-        //         colors: [
-        //           Theme.Colors.loginGradientButtonEnd,
-        //           Theme.Colors.loginGradientButtonStart
-        //         ],
-        //         begin: const FractionalOffset(0.0, 0.0),
-        //         end: const FractionalOffset(1.0, 1.0),
-        //         stops: [0.0, 1.0],
-        //         tileMode: TileMode.repeated),
-        //   ),
-        //   child: Center(
-        //     child: Image.asset('assets/img/login_logo.png'),
-        //     // child: Text(
-        //     //   europeanCountries[index],
-        //     //   style: TextStyle(
-        //     //       color: Colors.white,
-        //     //       fontSize: 20.0,
-        //     //       fontFamily: "WorkSansSemiBold"),
-        //     // ),
-        //   ),
-        // ),
-        // child: ProductCard(),
       ),
     );
   }
+
+  final List<Color> kMixedColors = [
+    Color(0xff71A5D7),
+    Color(0xff72CCD4),
+    Color(0xffFBAB57),
+    Color(0xffF8B993),
+    Color(0xff962D17),
+    Color(0xffc657fb),
+    Color(0xfffb8457),
+  ];
+
+  final List<Category> categories = [
+    Category(image: "assets/img/shoe_thumb_1.png", name: "Nike"),
+    Category(image: "assets/img/shoe_thumb_1.png", name: "Nike"),
+    Category(image: "assets/img/shoe_thumb_1.png", name: "Nike"),
+    Category(image: "assets/img/shoe_thumb_1.png", name: "Nike"),
+    Category(image: "assets/img/shoe_thumb_1.png", name: "Nike"),
+  ];
+}
+
+class Category {
+  final String image;
+  final String name;
+
+  Category({@required this.image, @required this.name});
 }
